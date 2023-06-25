@@ -14,6 +14,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+  late ScaffoldMessengerState scaffoldMessengerState;
   int currentStep = 0;
   String services = '1';
   DateTime selectedDate = DateTime.now();
@@ -32,6 +34,9 @@ class _RegisterState extends State<Register> {
   String? photo_prestataire;
   String? photo_piece_recto;
   String? photo_piece_verso;
+  String? errorMessage;
+  String? successMessage;
+
 
   continueStep() async {
     if (currentStep < 2) {
@@ -65,7 +70,7 @@ class _RegisterState extends State<Register> {
       // Envoyer la requête POST
       var response = await http.post(
         Uri.parse(
-            'http://127.0.0.1:8000/api/prestataire/'), // Remplacez l'URL par votre endpoint
+            'http://172.20.10.2:8000/api/prestataire/'), // Remplacez l'URL par votre endpoint
         headers: {'Content-Type': 'application/json'},
         body: jsonData,
       );
@@ -74,13 +79,25 @@ class _RegisterState extends State<Register> {
       if (response.statusCode == 200) {
         // La requête a réussi
         var responseData = json.decode(response.body);
-        print(responseData);
+         scaffoldMessengerState.showSnackBar(
+          SnackBar(
+            content: Text('Inscription réussie'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        // print(responseData);
         // Traitez la réponse ici
       } else {
         // La requête a échoué
         var responseData = json.decode(response.body);
-        print(responseData);
-        print('Request failed with status: ${response.statusCode}');
+        scaffoldMessengerState.showSnackBar(
+          SnackBar(
+            content: Text('Erreur lors de l\'inscription, veuillez bien rentrer tous les champs'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        // print(responseData);
+        // print('Request failed with status: ${response.statusCode}');
       }
     }
   }
@@ -379,6 +396,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
