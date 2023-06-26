@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+import 'package:djossi_mobile_app/onboarding.dart';
+
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -45,60 +47,64 @@ class _RegisterState extends State<Register> {
       });
       debugPrint(currentStep.toString());
     } else if (currentStep >= 2) {
-      var data = {
-        'nom_prestataire': nom_prestataire.text,
-        'prenom_prestataire': prenom_prestataire.text,
-        'services': services,
-        'username': username.text,
-        'password': password.text,
-        'phone_number': phone_number.text,
-        'numero_cni': numero_cni.text,
-        'biographie': biographie.text,
-        'ville': ville,
-        'commune': commune,
-        'quartier': quartier.text,
-        'cite': cite.text,
-        'numero_residence': numero_residence.text,
-        'photo_prestataire': photo_prestataire,
-        'photo_piece_recto': photo_piece_recto,
-        'photo_piece_verso': photo_piece_verso,
-      };
+      // var data = {
+      //   'nom_prestataire': nom_prestataire.text,
+      //   'prenom_prestataire': prenom_prestataire.text,
+      //   'services': services,
+      //   'username': username.text,
+      //   'password': password.text,
+      //   'phone_number': phone_number.text,
+      //   'numero_cni': numero_cni.text,
+      //   'biographie': biographie.text,
+      //   'ville': ville,
+      //   'commune': commune,
+      //   'quartier': quartier.text,
+      //   'cite': cite.text,
+      //   'numero_residence': numero_residence.text,
+      //   'photo_prestataire': photo_prestataire,
+      //   'photo_piece_recto': photo_piece_recto,
+      //   'photo_piece_verso': photo_piece_verso,
+      // };
 
-      // Convertir l'objet Map en JSON
-      var jsonData = json.encode(data);
+      // // Convertir l'objet Map en JSON
+      // var jsonData = json.encode(data);
 
-      // Envoyer la requête POST
-      var response = await http.post(
-        Uri.parse(
-            'http://172.20.10.2:8000/api/prestataire/'), // Remplacez l'URL par votre endpoint
-        headers: {'Content-Type': 'application/json'},
-        body: jsonData,
-      );
+      // // Envoyer la requête POST
+      // var response = await http.post(
+      //   Uri.parse(
+      //       'http://172.20.10.2:8000/api/prestataire/'), // Remplacez l'URL par votre endpoint
+      //   headers: {'Content-Type': 'application/json'},
+      //   body: jsonData,
+      // );
 
-      // Vérifier le code de réponse
-      if (response.statusCode == 200) {
-        // La requête a réussi
-        var responseData = json.decode(response.body);
-         scaffoldMessengerState.showSnackBar(
-          SnackBar(
-            content: Text('Inscription réussie'),
-            backgroundColor: Colors.green,
-          ),
-        );
-        // print(responseData);
-        // Traitez la réponse ici
-      } else {
-        // La requête a échoué
-        var responseData = json.decode(response.body);
-        scaffoldMessengerState.showSnackBar(
-          SnackBar(
-            content: Text('Erreur lors de l\'inscription, veuillez bien rentrer tous les champs'),
-            backgroundColor: Colors.red,
-          ),
-        );
-        // print(responseData);
-        // print('Request failed with status: ${response.statusCode}');
-      }
+      // // Vérifier le code de réponse
+      // if (response.statusCode == 200) {
+      //   // La requête a réussi
+      //   var responseData = json.decode(response.body);
+      //    scaffoldMessengerState.showSnackBar(
+      //     SnackBar(
+      //       content: Text('Inscription réussie'),
+      //       backgroundColor: Colors.green,
+      //     ),
+
+      //   );
+      //   // print(responseData);
+      //   // Traitez la réponse ici
+      // } else {
+      //   // La requête a échoué
+      //   var responseData = json.decode(response.body);
+      //   scaffoldMessengerState.showSnackBar(
+      //     SnackBar(
+      //       content: Text('Erreur lors de l\'inscription, veuillez bien rentrer tous les champs'),
+      //       backgroundColor: Colors.red,
+      //     ),
+      //   );
+      //   // print(responseData);
+      //   // print('Request failed with status: ${response.statusCode}');
+      // }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                 builder: (BuildContext context) => const Onboarding(),
+                              ));
     }
   }
 

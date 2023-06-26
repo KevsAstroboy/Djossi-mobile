@@ -1,4 +1,5 @@
 import 'package:djossi_mobile_app/Register.dart';
+import 'package:djossi_mobile_app/Authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,7 +37,7 @@ class _OnboardingState extends State<Onboarding> {
             InkWell(
                 onTap: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (BuildContext context) => Scaffold(),
+                    builder: (BuildContext context) => Authentication(),
                   ));
                 },
                 child: Padding(
