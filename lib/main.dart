@@ -3,8 +3,6 @@ import 'package:djossi_mobile_app/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-import 'main_screen.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const MainScreen(),
+      home: const Splashscreen(),
     );
   }
 }

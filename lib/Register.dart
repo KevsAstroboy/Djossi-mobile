@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:djossi_mobile_app/Authentication.dart';
 import 'package:djossi_mobile_app/constants.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:djossi_mobile_app/onboarding.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:http_parser/http_parser.dart';
@@ -114,7 +112,7 @@ class _RegisterState extends State<Register> {
           ),
         );
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (ctx) => Authentication()));
+            context, MaterialPageRoute(builder: (ctx) => const Authentication()));
         // print(responseData);
         // Traitez la réponse ici
       } else {
@@ -446,7 +444,7 @@ class _RegisterState extends State<Register> {
               visible: isLoading,
               child: Container(
                 color: Colors.black26,
-                child: Center(
+                child: const Center(
                   child: CircularProgressIndicator(),
                 ),
               )),

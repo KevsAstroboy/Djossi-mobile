@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:djossi_mobile_app/Authentication.dart';
 import 'package:djossi_mobile_app/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
+
 
 import 'constants.dart';
 import 'main_screen.dart';
@@ -20,40 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late List allServicelist;
   bool isLoading = false;
-
-  Future<void> getAllDemandesServices() async {
-    try {
-      final response =
-          await get(Uri.parse("${AppUrl.getReservation}/${prestataire.id}"));
-
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        final responsePrestataire = responseData['data'];
-        debugPrint("La requete a reussis, voici le contenu : $responseData");
-      } else {
-        var responseData = json.decode(response.body);
-        debugPrint("La requete a echoue, voici le contenu : $responseData");
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(responseData['data']),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
 
   int _selectedItemIndex = 0;
   final screens = <Widget>[const MainScreen(), const AccountScren()];
@@ -82,12 +46,12 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width / 2,
         decoration: index == _selectedItemIndex
             ? BoxDecoration(
-                border: Border(
+                border: const Border(
                     bottom: BorderSide(width: 4, color: Color(0xff426CEA))),
                 gradient: LinearGradient(
                   colors: [
-                    Color(0xff426CEA).withOpacity(0.3),
-                    Color(0xff426CEA).withOpacity(0.015)
+                    const Color(0xff426CEA).withOpacity(0.3),
+                    const Color(0xff426CEA).withOpacity(0.015)
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -100,13 +64,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const CustomAppBar({Key? key}) : super(key: key);
+
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -121,14 +86,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
             backgroundImage: NetworkImage(
                 "${AppUrl.onlineSimpleUrl}/${prestataire.profileUrl}"),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text("Bienvenue, ${prestataire.prenom}",
               style: GoogleFonts.poppins(fontSize: 16, color: Colors.black)),
         ],
       ),
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.notifications,
             size: 30,
             color: Colors.black,
