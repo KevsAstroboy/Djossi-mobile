@@ -57,9 +57,9 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> cancelDemande(String reservationId) async {
     try {
       final response =
-          await get(Uri.parse("${AppUrl.annulerReservation}$reservationId/"));
+          await post(Uri.parse("${AppUrl.annulerReservation}$reservationId/"));
       debugPrint(
-          "La requete a ete lance, voici le contenu : ${AppUrl.annulerReservation}/$reservationId");
+          "La requete a ete lance, voici le contenu : ${AppUrl.annulerReservation}$reservationId");
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
 
@@ -70,7 +70,8 @@ class _MainScreenState extends State<MainScreen> {
             "La requete a reussis, voici le contenu de la reponse : $responseData");
       } else {
         var responseData = json.decode(response.body);
-        debugPrint("La requete a echoue, voici le contenu : $responseData");
+        debugPrint(
+            "La requete a echoue, voici le contenu : $responseData et le code ${response.statusCode}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(responseData['data']),
@@ -94,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
       final response =
           await get(Uri.parse("${AppUrl.finirReservation}$reservationId/"));
       debugPrint(
-          "La requete a ete lance, voici le contenu : ${AppUrl.finirReservation}/$reservationId");
+          "La requete a ete lance, voici le contenu : ${AppUrl.finirReservation}$reservationId");
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
 
@@ -335,7 +336,7 @@ class DemadeServiceWidget extends StatelessWidget {
                           width: 10,
                         ),
                         ElevatedButton(
-                          onPressed: finishService,
+                          onPressed: cancelService,
                           child: const Text("Refuser"),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),

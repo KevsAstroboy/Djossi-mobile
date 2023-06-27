@@ -51,7 +51,6 @@ class DemandeService {
         ? dateReservatioon = null
         : dateReservatioon = DateTime.parse(json['date_reservation']);
 
-    debugPrint("Converting reservation");
     json['status_reservation'].isEmpty
         ? status = null
         : status = getStatus(json['status_reservation']);
