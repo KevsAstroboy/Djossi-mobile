@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:djossi_mobile_app/constants.dart';
+import 'package:djossi_mobile_app/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:djossi_mobile_app/HomePage.dart';
@@ -12,6 +13,8 @@ class Authentication extends StatefulWidget {
   @override
   State<Authentication> createState() => _AuthenticationState();
 }
+
+late Prestataire prestataire;
 
 class _AuthenticationState extends State<Authentication> {
   TextEditingController numberController = TextEditingController();
@@ -215,20 +218,27 @@ class _AuthenticationState extends State<Authentication> {
           headers: {'Content-Type': 'application/json'}, body: jsonData);
 
       if (response.statusCode == 200) {
-        var responseData = json.decode(response.body);
+        final responseData = json.decode(response.body);
+        final responsePrestataire = responseData['data'];
         debugPrint("La requete a reussis, voici le contenu : $responseData");
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Inscription réussie'),
+            content: Text('Connexion réussie'),
             backgroundColor: Colors.green,
           ),
         );
+        prestataire = Prestataire(
+            id: responsePrestataire["id"],
+            profileUrl: responsePrestataire["photo_prestataire"],
+            nom: responsePrestataire["nom_prestataire"],
+            prenom: responsePrestataire["prenom_prestataire"]);
 
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (BuildContext context) => const HomePage(),
         ));
       } else {
         var responseData = json.decode(response.body);
+
         debugPrint("Le corps de la requete est : $jsonData");
         debugPrint("La requete a echoue, voici le contenu : $responseData");
         ScaffoldMessenger.of(context).showSnackBar(

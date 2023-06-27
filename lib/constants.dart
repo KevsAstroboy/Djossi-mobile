@@ -1,4 +1,5 @@
 abstract class AppUrl {
+  static const String onlineSimpleUrl = "https://djossi-4hh5r2wlaq-uc.a.run.app";
   static const String onlineBaseUrl = "https://djossi-4hh5r2wlaq-uc.a.run.app/api";
   static const String inscriptionPrestataire = "$onlineBaseUrl/prestataire/";
   static const String connexionPrestataire = "$onlineBaseUrl/login-p/";
