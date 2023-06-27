@@ -1,7 +1,8 @@
-import 'package:djossi_mobile_app/Register.dart';
-import 'package:djossi_mobile_app/Authentication.dart';
+import 'package:djossi_mobile_app/register.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'Authentication.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);

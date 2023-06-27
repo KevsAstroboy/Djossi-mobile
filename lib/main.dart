@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp(
+      title: 'Djossi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-      primarySwatch: Colors.indigo,
+        primarySwatch: Colors.indigo,
       ),
-      home: Splashscreen(),
+      home: const Splashscreen(),
     );
   }
 }
@@ -45,21 +45,24 @@ class _SplashscreenState extends State<Splashscreen> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text('djossi',style: GoogleFonts.poppins(
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff426CEA))),
+            child: Text(
+              'djossi',
+              style: GoogleFonts.poppins(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xff426CEA),
+              ),
+            ),
           )
         ],
       ),
     );
   }
 }
-
-
